@@ -45,9 +45,9 @@ public:
   void load_company_names(const std::vector<std::string>& company_names) override {
     company_names_ = company_names;
     preprocessing::StringPreprocessor preprocessor;
-    preprocessor.set_forbidden_chars(" \t\n\r\"\'.,:|?!");
+    preprocessor.set_forbidden_chars(" \t\n\r\"\'.,:|?!()");
     preprocessor.set_forbidden_words({
-      "inc", "org", "co", "com", "llc", "ltd"
+      "inc", "org", "co", "com", "llc", "ltd", "limited", " & ", "the ", "(c)", "no."
     });
     for (std::string& name : company_names_) {
       name = preprocessor.preprocess(name);
