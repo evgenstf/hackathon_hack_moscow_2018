@@ -4,4 +4,4 @@ include(../common.cmake)
 
 file(GLOB SOURCES "*.cpp")
 
-add_library(dbscan ${SOURCES})
+add_library(string_preprocessor ${SOURCES})
