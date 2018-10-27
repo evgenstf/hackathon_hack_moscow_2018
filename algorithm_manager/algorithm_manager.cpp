@@ -21,6 +21,7 @@ std::vector<PredictionSet> AlgorithmManager::prediction_sets() {
   for (auto& algorithm : algorithms_) {
     DEBUG("getting prediction from " << algorithm->name())
     result.push_back(algorithm->prediction_set());
+    DEBUG("finished")
   }
   return result;
 }
