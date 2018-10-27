@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cassert>
+#include <cmath>
 
 namespace {
 
@@ -75,7 +76,7 @@ double Arranger::GetScore(const PredictionSet& prediction_set) const {
             }
         }
 
-        score += 1 / (max_product - min_product + 1);
+        score += sqrt(max_product) / (max_product - min_product + 1);
     }
 
     return score * companies_by_cluster.size();
