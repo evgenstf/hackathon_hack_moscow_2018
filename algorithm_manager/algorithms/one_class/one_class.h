@@ -18,7 +18,7 @@ public:
     return result;
   }
 
-  std::string name() const override { return kAlgorithmName; }
+  const std::string& name() const override { return kAlgorithmName; }
 
 private:
   const std::string kAlgorithmName = "OneClass";
