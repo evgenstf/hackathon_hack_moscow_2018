@@ -36,7 +36,7 @@ public:
     for (const auto& company_name : company_names_) {
       points.emplace_back(company_name);
     }
-    DBSCAN<HasherPoint> dbscan(10000, 3, points);
+    DBSCAN<HasherPoint> dbscan(100000, 3, points);
     const std::vector<unsigned int>& clusters = dbscan.get_clusters();
 
     for (size_t i = 0; i < company_names_.size(); ++i) {
