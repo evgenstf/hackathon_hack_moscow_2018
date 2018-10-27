@@ -5,5 +5,11 @@
       "company_names_row" : "Company Name"
     }
   ],
+  "cached_prediction_sets": [
+    {
+      "filename" : "data/cached_prediction_sets/ilon_mask.csv",
+      "clusterizator_name" : "ilon_mask"
+    }
+  ],
   "arranger_model" : "data/arranger_models/presentation_model.csv"
 }
