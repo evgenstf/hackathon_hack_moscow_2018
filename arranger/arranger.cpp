@@ -79,5 +79,5 @@ double Arranger::GetScore(const PredictionSet& prediction_set) const {
         score += sqrt(max_product) / (max_product - min_product + 1);
     }
 
-    return score * companies_by_cluster.size();
+    return (score + 1) * companies_by_cluster.size();
 }
