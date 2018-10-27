@@ -1,6 +1,5 @@
 #pragma once
 
-#include "point.h"
 #include <vector>
 #include <string>
 #include <cstring>
@@ -11,6 +10,7 @@ enum class EClassified {
   CLASSIFIED
 };
 
+template <typename Point>
 class DBSCAN {
 public:
   DBSCAN(double eps, unsigned int min_points, const std::vector<Point>& points)
