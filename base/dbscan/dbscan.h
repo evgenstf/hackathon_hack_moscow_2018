@@ -10,6 +10,7 @@ enum class EClassified {
   CLASSIFIED
 };
 
+// Point is class with "double distance_to(const Point& point) const" function
 template <typename Point>
 class DBSCAN {
 public:
