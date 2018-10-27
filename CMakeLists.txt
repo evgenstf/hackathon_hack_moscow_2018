@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.4)
-project(score_calculator)
+project(clusterizator_analyzer)
 
 include(base/common.cmake)
 include_directories(.)
@@ -9,9 +9,9 @@ add_subdirectory(data_provider data_provider)
 add_subdirectory(clusterizator_manager clusterizator_manager)
 add_subdirectory(arranger arranger)
 
-add_executable(score_calculator_bin "launcher.cpp")
-target_link_libraries(score_calculator_bin logger command_parser data_provider clusterizator_manager
+add_executable(clusterizator_analyzer_bin "launcher.cpp")
+target_link_libraries(clusterizator_analyzer_bin logger command_parser data_provider clusterizator_manager
   arranger)
-set_target_properties(score_calculator_bin PROPERTIES OUTPUT_NAME score_calculator)
+set_target_properties(clusterizator_analyzer_bin PROPERTIES OUTPUT_NAME clusterizator_analyzer)
 add_custom_target(create_data_symlink ALL COMMAND ${CMAKE_COMMAND} -E create_symlink ../data data)
 
