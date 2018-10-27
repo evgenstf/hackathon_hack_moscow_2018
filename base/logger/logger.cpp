@@ -39,22 +39,22 @@ void Logger::print_log_internal(const Log& log) const {
   }
   switch (log.level) {
     case LogLevel::Trace:
-      std::clog << "TRACE :: ";
+      std::clog << "TRACE   :: ";
       break;
     case LogLevel::Debug:
-      std::clog << "DEBUG :: ";
+      std::clog << "DEBUG   :: ";
       break;
     case LogLevel::Info:
-      std::clog << "INFO :: ";
+      std::clog << "INFO    :: ";
       break;
     case LogLevel::Warning:
       std::clog << "WARNING :: ";
       break;
     case LogLevel::Error:
-      std::clog << "ERROR :: ";
+      std::clog << "ERROR   :: ";
       break;
     case LogLevel::Fatal:
-      std::clog << "FATAL :: ";
+      std::clog << "FATAL   :: ";
       break;
   }
   std::clog << log.message << std::endl;

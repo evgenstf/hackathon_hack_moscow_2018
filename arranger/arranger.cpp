@@ -27,7 +27,9 @@ Arranger::Arranger(const std::string& path) {
         std::vector<std::pair<std::string, std::string>> input(it.begin(), it.end());
         std::sort(input.begin(), input.end());
 
-        for (const auto& [key, value] : input) {
+        for (const auto& key_and_value : input) {
+            auto key = key_and_value.first;
+            auto value = key_and_value.second;
             if (key != kCompanyName) {
                 features.push_back(std::stod(value));
             }
@@ -49,12 +51,16 @@ double Arranger::GetScore(const PredictionSet& prediction_set) const {
     std::unordered_map<int, std::vector<std::string>> companies_by_cluster;
 
     const auto& predictions = prediction_set.class_by_company_name();
-    for (const auto& [name, cluster] : predictions) {
+    for (const auto& name_and_cluster : predictions) {
+        auto name = name_and_cluster.first;
+        auto cluster = name_and_cluster.second;
         companies_by_cluster[cluster].push_back(name);
     }
 
     // can be parallel for each cluster
-    for (const auto& [cluster, companies] : companies_by_cluster) {
+    for (const auto& cluster_and_companies : companies_by_cluster) {
+        auto cluster = cluster_and_companies.first;
+        auto companies = cluster_and_companies.second;
         double cluster_score = 0;
 
         for (size_t i = 0; i < companies.size(); ++i) {

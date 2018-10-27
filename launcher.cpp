@@ -2,10 +2,11 @@
 #include "base/command_parser/command_parser.h"
 #include "external_libraries/json.hpp"
 #include "data_provider/data_provider.h"
+#include "algorithm_manager/algorithm_manager.h"
+#include "arranger/arranger.h"
 #include <iostream>
 #include <fstream>
 #include <streambuf>
-#include <stdlib>
 
 using namespace std;
 using Json = nlohmann::json;
@@ -42,8 +43,17 @@ int main(int arguments_count, char* arguments[]) {
   }
 
   auto companies = data_provider.company_names();
-  for (const auto& company : companies) {
-    std::clog << company << std::endl;
+
+  AlgorithmManager algorithm_manager;
+  algorithm_manager.load_company_names(companies);
+
+  auto prediction_sets = algorithm_manager.prediction_sets();
+
+  Arranger arranger(config["arranger_model"]);
+  
+  for (const auto& prediction_set : prediction_sets) {
+    auto prediction_score = arranger.GetScore(prediction_set);
+    std::cout << prediction_set.algorithm_name() << " score: " << prediction_score << std::endl;
   }
 
 

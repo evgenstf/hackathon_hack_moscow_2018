@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.4)
 project(data_provider)
 include(../base/common.cmake)
 
-add_subdirectory(../base/csv_parser csv_parser)
+#add_subdirectory(../base/csv_parser csv_parser)
 
 file(GLOB SOURCES "data_provider.cpp")
 
