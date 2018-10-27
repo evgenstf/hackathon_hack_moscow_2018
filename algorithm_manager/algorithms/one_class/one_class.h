@@ -1,4 +1,5 @@
 #include "base/prediction_set.h"
+#include "base/dbscan/dbscan.h"
 #include "../../algorithm.h"
 
 class OneClass : public Algorithm {
@@ -17,7 +18,7 @@ public:
     return result;
   }
 
-  std::string name() const { return kAlgorithmName; }
+  const std::string& name() const override { return kAlgorithmName; }
 
 private:
   const std::string kAlgorithmName = "OneClass";

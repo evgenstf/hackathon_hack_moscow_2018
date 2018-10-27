@@ -3,6 +3,8 @@
 AlgorithmManager::AlgorithmManager() {
   INFO("load OneClass strategy")
   algorithms_.push_back(std::make_unique<OneClass>());
+  INFO("load Hasher strategy")
+  algorithms_.push_back(std::make_unique<Hasher>());
 }
 
 void AlgorithmManager::load_company_names(const std::vector<std::string>& company_names) {

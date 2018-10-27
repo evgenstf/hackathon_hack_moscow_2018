@@ -1,9 +1,8 @@
 #pragma once
 
-#include "point.h"
-
-#include <mutex>
 #include <vector>
+#include <string>
+#include <cstring>
 
 enum class EClassified {
   NOT_CLASSIFIED,
@@ -11,6 +10,7 @@ enum class EClassified {
   CLASSIFIED
 };
 
+template <typename Point>
 class DBSCAN {
 public:
   DBSCAN(double eps, unsigned int min_points, const std::vector<Point>& points)
@@ -20,10 +20,10 @@ public:
   {
   }
 
-  const std::vector<unsigned int>& get_clusters() const {
-    try {
-      std::call_once(flag, run);
-    } catch (...) {
+  const std::vector<unsigned int>& get_clusters() {
+    if (!processed_) {
+      run();
+      processed_ = true;
     }
     return cluster_;
   }
@@ -35,7 +35,7 @@ private:
     classified_.resize(points_.size(), EClassified::NOT_CLASSIFIED);
     cluster_.resize(points_.size());
     for (size_t i = 0; i < points_.size(); ++i) {
-      if (classified[i] != EClassified::NOT_CLASSIFIED)
+      if (classified_[i] != EClassified::NOT_CLASSIFIED)
         continue;
 
       if (is_core_object(i)) {
@@ -58,8 +58,8 @@ private:
     if (!is_core_object(i))
       return;
 
-    for (size_t j : adjucent_points_[i]) {
-      if (classified_[j] != EClassfied::NOT_CLASSIFIED)
+    for (size_t j : adjacent_points_[i]) {
+      if (classified_[j] != EClassified::NOT_CLASSIFIED)
         continue;
       dfs(j, cluster);
     }
@@ -72,7 +72,7 @@ private:
         if (i == j)
           continue;
 
-        if (points_[i].distance_to(points_[j]) <= eps) {
+        if (points_[i].distance_to(points_[j]) <= eps_) {
           adjacent_points_[i].push_back(j);
         }
       }
@@ -91,6 +91,5 @@ private:
   std::vector<EClassified> classified_;
   std::vector<unsigned int> cluster_;
   size_t clusters_num_ = 0;
-
-  std::once_flag flag;
-}
+  bool processed_ = false;
+};
