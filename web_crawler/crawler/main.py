@@ -3,6 +3,9 @@ import json
 import os
 import requests
 
+from random import randint
+from time import sleep
+
 from const import URL_PATTERN
 
 
@@ -11,6 +14,8 @@ def crawl(company_name):
 
     if r.status_code != 200:
         return None
+
+    sleep(randint(1, 5))
 
     return r.text
 
@@ -29,14 +34,17 @@ def main(args):
     if args.limit is not None:
         companies_names = companies_names[:args.limit]
 
+    failed = 0
     result = []
     for company_name in companies_names:
         crawled_data = crawl(company_name)
 
         if crawled_data is None:
-            break
+            failed += 1
+            continue
 
         result.append(crawled_data)
+    print('failed queries {}/{}'.format(failed, len(companies_names)))
 
     with open(args.output_file, 'w') as f:
         f.write('\n'.join(result))
