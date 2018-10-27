@@ -3,9 +3,10 @@ project(algorithm_manager)
 
 include(../base/common.cmake)
 add_subdirectory(../base/logger logger)
+add_subdirectory(../base/dbscan dbscan)
 
 add_library(algorithm_manager "algorithm_manager.cpp")
-target_link_libraries(algorithm_manager logger)
+target_link_libraries(algorithm_manager logger dbscan)
 
 add_executable(algorithm_manager_example "example.cpp")
 target_link_libraries(algorithm_manager_example algorithm_manager)
