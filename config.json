@@ -1,0 +1,9 @@
+{
+  "sources": [
+    {
+      "filename" : "data/research/companies.csv",
+      "company_names_row" : "Company Name"
+    }
+  ],
+  "arranger_model" : "data/arranger_models/presentation_model.csv"
+}
