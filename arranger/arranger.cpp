@@ -75,7 +75,7 @@ double Arranger::GetScore(const PredictionSet& prediction_set) const {
             }
         }
 
-        score += 1 / (max_product - min_product + 1e-9);
+        score += 1 / (max_product - min_product + 1);
     }
 
     return score * companies_by_cluster.size();
