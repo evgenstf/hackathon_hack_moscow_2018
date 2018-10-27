@@ -7,7 +7,6 @@ from const import URL_PATTERN
 
 
 def crawl(company_name):
-    print(URL_PATTERN.format(company_name))
     r = requests.get(URL_PATTERN.format(company_name))
 
     if r.status_code != 200:
@@ -17,9 +16,9 @@ def crawl(company_name):
 
 
 def get_companies_names(path):
-    with open(path) as f:
+    with open(path, encoding='utf-8') as f:
          companies_names = f.read().split('\n')
-         companies_names.pop()
+         company_name.pop()
 
          return companies_names
 
