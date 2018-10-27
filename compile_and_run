@@ -1,0 +1,10 @@
+#!/bin/bash -e
+if [ ! -d "build" ]; then
+  mkdir build
+fi
+cd build
+cmake ..
+make
+
+cp ../config_example.json config.json
+./clusterizator_analyzer config.json
