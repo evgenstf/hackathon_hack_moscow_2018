@@ -5,22 +5,25 @@
 #include <vector>
 #include <unordered_map>
 
+using DataSource = std::pair<std::string, std::string>;
+
 class DataProvider {
 public:
-  DataProvider(const std::pair<std::string, std::string>& input_table);
+  DataProvider() = default;
+  DataProvider(const std::vector<DataSource>& sources);
 
   std::vector<std::string> company_names() const;
 
+  void add_source(const DataSource& source);
+
 private:
-  std::vector<std::string> company_names_from_csv(
-    const std::pair<std::string, std::string>& input_table
-  ) const;
+  std::vector<std::string> company_names_from_csv(const DataSource& source) const;
 
   std::vector<std::string> company_names(
     const std::vector<std::unordered_map<std::string, std::string>>& items,
-    const std::string& company_field_name
+    const std::string& company_names_row
   ) const;
 
 private:
-  std::pair<std::string, std::string> input_table_;
+  std::vector<DataSource> sources_;
 };

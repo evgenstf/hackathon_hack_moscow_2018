@@ -25,7 +25,7 @@ struct Log {
 
 class Logger {
 public:
-  Logger();
+  Logger(bool is_async = false);
   ~Logger();
 
   void set_min_print_level(LogLevel level);
@@ -36,6 +36,7 @@ public:
 private:
   void print_log_internal(const Log& log) const;
 
+  bool is_async_;
   LogLevel min_print_level_;
   std::mutex mutex_;
   std::thread logging_thread_;

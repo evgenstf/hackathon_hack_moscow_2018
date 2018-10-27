@@ -1,5 +1,5 @@
 #include "data_provider.h"
-
+#include "base/logger/logger.h"
 #include "base/csv_parser/csv_parser.h"
 #include <iostream>
 
@@ -13,28 +13,41 @@ namespace {
   }
 };
 
-DataProvider::DataProvider(const std::pair<std::string, std::string>& input_table)
-  : input_table_(input_table)
-{
+DataProvider::DataProvider(const std::vector<DataSource>& sources) {
+  for (const auto& source : sources) {
+    add_source(source);
+  }
+}
+
+void DataProvider::add_source(const DataSource& source) {
+  DEBUG("add source: filename: " << source.first << " company_names_row: " << source.second)
+  sources_.push_back(source);
 }
 
 std::vector<std::string> DataProvider::company_names() const {
-  return company_names_from_csv(input_table_);
+  std::vector<std::string> result;
+  for (const auto& source : sources_) {
+    DEBUG("try extract company_names from file: " << source.first)
+    auto companies = company_names_from_csv(source);
+    result.insert(result.end(), companies.begin(), companies.end());
+  }
+  return result;
 }
 
-std::vector<std::string> DataProvider::company_names_from_csv(const std::pair<std::string, std::string>& input_table) const {
-  CsvParser csv_parser(input_table_.first);
-  return company_names(csv_parser.items(), input_table_.second);
+std::vector<std::string> DataProvider::company_names_from_csv(
+    const DataSource& source) const {
+  CsvParser csv_parser(source.first);
+  return company_names(csv_parser.items(), source.second);
 }
 
 std::vector<std::string> DataProvider::company_names(
   const std::vector<std::unordered_map<std::string, std::string>>& items,
-  const std::string& company_field_name
+  const std::string& company_names_row
 ) const {
   std::vector<std::string> company_names;
   company_names.reserve(items.size());
   for (const auto& item : items) {
-    company_names.push_back(Strip(item.at(company_field_name)));
+    company_names.push_back(Strip(item.at(company_names_row)));
   }
   return company_names;
 }

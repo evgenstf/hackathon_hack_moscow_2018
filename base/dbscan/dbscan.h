@@ -1,9 +1,9 @@
 #pragma once
 
 #include "point.h"
-
-#include <cstring>
 #include <vector>
+#include <string>
+#include <cstring>
 
 enum class EClassified {
   NOT_CLASSIFIED,
