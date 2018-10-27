@@ -43,6 +43,7 @@ public:
   LevenshteinPreprocessed() {}
 
   void load_company_names(const std::vector<std::string>& company_names) override {
+    original_names_ = company_names;
     company_names_ = company_names;
     preprocessing::StringPreprocessor preprocessor;
     preprocessor.set_forbidden_chars(" \t\n\r\"\'.,:|?!()");
@@ -66,7 +67,7 @@ public:
     const std::vector<unsigned int>& clusters = dbscan.get_clusters();
 
     for (size_t i = 0; i < company_names_.size(); ++i) {
-      result.add_prediction(company_names_[i], clusters[i]);
+      result.add_prediction(original_names_[i], clusters[i]);
     }
     return result;
   }
@@ -77,4 +78,5 @@ private:
   const std::string kClusterizatorName = "Levenshtein with company names preprocessing";
 
   std::vector<std::string> company_names_;
+  std::vector<std::string> original_names_;
 };

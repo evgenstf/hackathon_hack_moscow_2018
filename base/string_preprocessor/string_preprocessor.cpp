@@ -40,7 +40,7 @@ std::string StringPreprocessor::preprocess(std::string original) const {
     if (match_any_word) {
       continue;
     }
-    if (chars_.find(original[i]) == std::string::npos)
+    if (chars_.find(original[i]) != std::string::npos)
       continue;
     result += original[i];
   }
