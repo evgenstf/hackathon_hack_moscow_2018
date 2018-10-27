@@ -6,11 +6,11 @@ include_directories(.)
 
 add_subdirectory(base/command_parser command_parser)
 add_subdirectory(data_provider data_provider)
-add_subdirectory(algorithm_manager algorithm_manager)
+add_subdirectory(clusterizator_manager clusterizator_manager)
 add_subdirectory(arranger arranger)
 
 add_executable(score_calculator_bin "launcher.cpp")
-target_link_libraries(score_calculator_bin logger command_parser data_provider algorithm_manager
+target_link_libraries(score_calculator_bin logger command_parser data_provider clusterizator_manager
   arranger)
 set_target_properties(score_calculator_bin PROPERTIES OUTPUT_NAME score_calculator)
 add_custom_target(create_data_symlink ALL COMMAND ${CMAKE_COMMAND} -E create_symlink ../data data)

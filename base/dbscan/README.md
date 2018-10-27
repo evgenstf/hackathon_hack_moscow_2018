@@ -1,1 +1,1 @@
-# [DBSCAN](https://en.wikipedia.org/wiki/DBSCAN) is a data clustering algorithm
+# [DBSCAN](https://en.wikipedia.org/wiki/DBSCAN) is a data clustering clusterizator
