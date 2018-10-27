@@ -1,5 +1,6 @@
 #include "algorithm.h"
 #include "algorithms/one_class/one_class.h"
+#include "algorithms/hasher/hasher.h"
 #include "base/logger/logger.h"
 #include <memory>
 
