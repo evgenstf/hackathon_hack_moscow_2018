@@ -19,7 +19,7 @@ def crawl(company_name):
 def get_companies_names(path):
     with open(path) as f:
          companies_names = f.read().split('\n')
-         company_name.pop()
+         companies_names.pop()
 
          return companies_names
 
