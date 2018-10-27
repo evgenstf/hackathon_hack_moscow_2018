@@ -54,30 +54,22 @@ double Arranger::GetScore(const PredictionSet& prediction_set) const {
         companies_by_cluster[cluster].push_back(name);
     }
 
+    const size_t clusters = companies_by_cluster.size();
+
     // can be parallel for each cluster
     for (const auto& [cluster, companies] : companies_by_cluster) {
-        if (companies.size() < 3) {
+        if (companies.size() < 2) {
+            score += clusters;
             continue;
         }
-        double min_product = 0;
-        double max_product = 0;
-        bool is_first = true;
 
         for (size_t i = 0; i < companies.size(); ++i) {
             for (size_t j = i + 1; j < companies.size(); ++j) {
-                const double scalar = ScalarProduct(GetFeatures(companies[i]), GetFeatures(companies[j]));
-                if (is_first) {
-                    min_product = max_product = scalar;
-                } else {
-                    min_product = std::min(min_product, scalar);
-                    max_product = std::max(max_product, scalar);
-                }
-                is_first = false;
+                const double product = ScalarProduct(GetFeatures(companies[i]), GetFeatures(companies[j]));
+                score += 1. / (product + 1);
             }
         }
-
-        score += sqrt(max_product) / (max_product - min_product + 1);
     }
 
-    return (score + 1) * companies_by_cluster.size();
+    return score;
 }
