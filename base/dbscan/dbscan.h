@@ -2,6 +2,7 @@
 
 #include "point.h"
 
+#include <cstring>
 #include <vector>
 
 enum class EClassified {
