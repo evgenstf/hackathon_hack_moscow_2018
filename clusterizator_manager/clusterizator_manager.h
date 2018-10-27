@@ -2,6 +2,7 @@
 #include "clusterizators/one_class/one_class.h"
 #include "clusterizators/hasher/hasher.h"
 #include "clusterizators/levenshtein/levenshtein.h"
+#include "clusterizators/levenshtein_preprocessed/levenshtein_preprocessed.h"
 #include "base/logger/logger.h"
 #include <memory>
 

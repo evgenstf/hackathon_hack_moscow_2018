@@ -2,21 +2,22 @@
 
 #include <cctype>
 #include <string>
+#include <vector>
 
 namespace preprocessing {
 
 namespace {
   std::string to_lower(std::string s) {
     for (char& c : s) {
-      c = to_lower(c);
+      c = std::tolower(c);
     }
+    return s;
   }
-};
+}
 
 class StringPreprocessor {
 public:
-  StringPreprocessor(const std::string& s)
-    : original_(to_lower(s))
+  StringPreprocessor()
   {
   }
 
@@ -24,22 +25,22 @@ public:
     chars_ = to_lower(chars);
   }
 
-  void set_forbidden_words(const std::vector<std::string>>& words) {
+  void set_forbidden_words(const std::vector<std::string>& words) {
     words_ = words;
     for (std::string& word : words_) {
       word = to_lower(word);
     }
   }
 
-  std::string preprocess() const {
+  std::string preprocess(const std::string& original) const {
     std::string result;
-    for (size_t i = 0; i < original_.size(); ++i) {
-      if (chars_.find(original_[i]) == std::string::npos)
+    for (size_t i = 0; i < original.size(); ++i) {
+      if (chars_.find(original[i]) == std::string::npos)
         continue;
       bool match_any_word = false;
       for (const std::string& word : words_) {
-        if (original_.substr(i, word.size()) == word) {
-          i += words.size() - 1;
+        if (original.substr(i, word.size()) == word) {
+          i += word.size() - 1;
           match_any_word = true;
           break;
         }
@@ -47,13 +48,12 @@ public:
       if (match_any_word) {
         continue;
       }
-      result += original_[i];
+      result += original[i];
     }
     return result;
   }
 
 private:
-  const std::string original_;
   std::string chars_;
   std::vector<std::string> words_;
 };

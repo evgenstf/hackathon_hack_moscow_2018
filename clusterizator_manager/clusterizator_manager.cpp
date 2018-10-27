@@ -7,6 +7,8 @@ ClusterizatorManager::ClusterizatorManager() {
   clusterizators_.push_back(std::make_unique<Hasher>());
   INFO("load Levenshtein strategy")
   clusterizators_.push_back(std::make_unique<Levenshtein>());
+  INFO("load Levenshtein with company names preprocessing strategy")
+  clusterizators_.push_back(std::make_unique<LevenshteinPreprocessed>());
 }
 
 void ClusterizatorManager::load_company_names(const std::vector<std::string>& company_names) {
