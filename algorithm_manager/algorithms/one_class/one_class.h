@@ -1,4 +1,5 @@
 #include "base/prediction_set.h"
+#include "base/dbscan/dbscan.h"
 #include "../../algorithm.h"
 
 class OneClass : public Algorithm {
