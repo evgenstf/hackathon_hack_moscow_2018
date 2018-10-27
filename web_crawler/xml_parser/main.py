@@ -19,32 +19,35 @@ def read_file(path):
 def parse(raw):
     try:
         root = objectify.fromstring(raw)
+
+        data = dict()
+        data['company_name'] = root.request.query
+
+        metadata = dict()
+        for grouping in root.response.results.grouping:
+            for group in grouping.group:
+                doc = group.doc
+
+                doc_info = dict()
+
+                has_key = lambda element, key: element.find(key) is not None
+                get_text_from_element = lambda element, key: ''.join(element.find(key).itertext())
+
+                for key in ('title', 'headline'):
+                    if has_key(doc, key):
+                        doc_info[key] = get_text_from_element(doc, key)
+                props = doc.properties
+                if has_key(props, 'Snippet'):
+                    doc_info['Snippet'] = get_text_from_element(props, 'Snippet')
+
+                if 'docs' not in metadata:
+                    metadata['docs'] = []
+                metadata['docs'].append(doc_info)
+
+        data['metadata'] = json.dumps(metadata, ensure_ascii=False)
+        return data
     except:
         return None
-
-    data = dict()
-    data['company_name'] = root.request.query
-
-    metadata = dict()
-    for grouping in root.response.results.grouping:
-        for group in grouping.group:
-            doc = group.doc
-
-            doc_info = dict()
-
-            has_key = lambda element, key: element.find(key) is not None
-            get_text_from_element = lambda element, key: ''.join(element.find(key).itertext())
-
-            for key in ('title', 'headline'):
-                if has_key(doc, key):
-                    doc_info[key] = get_text_from_element(doc, key)
-
-            if 'docs' not in metadata:
-                metadata['docs'] = []
-            metadata['docs'].append(doc_info)
-
-    data['metadata'] = json.dumps(metadata, ensure_ascii=False)
-    return data
 
 
 def main(args):
