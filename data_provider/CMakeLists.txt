@@ -7,7 +7,7 @@ add_subdirectory(../base/csv_parser csv_parser)
 file(GLOB SOURCES "data_provider.cpp")
 
 add_library(data_provider ${SOURCES})
-target_link_libraries(data_provider csv_parser)
+target_link_libraries(data_provider csv_parser logger)
 
 add_executable(data_provider_example "example.cpp")
 target_link_libraries(data_provider_example data_provider)

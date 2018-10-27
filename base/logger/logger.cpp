@@ -1,14 +1,16 @@
 // Author: Evgenii Kazakov. Github: @evgenstf
 #include "logger.h"
 
-Logger::Logger():
-    min_print_level_(LogLevel::Trace) {
+Logger::Logger(bool is_async):
+    is_async_(is_async), min_print_level_(LogLevel::Trace) {
   start_logging();
 }
 
 Logger::~Logger() {
-  finish_logging();
-  logging_thread_.join();
+  if (is_async_) {
+    finish_logging();
+    logging_thread_.join();
+  }
 }
 
 void Logger::set_min_print_level(LogLevel level) {
@@ -22,6 +24,10 @@ void Logger::finish_logging() {
 }
 
 void Logger::print_log(Log log) {
+  if (!is_async_) {
+    print_log_internal(log);
+    return;
+  }
   std::lock_guard<std::mutex> lock(mutex_);
   logs_to_print_.push(log);
   logging_thread_wake_up_.notify_one();
@@ -55,18 +61,20 @@ void Logger::print_log_internal(const Log& log) const {
 }
 
 void Logger::start_logging() {
-  is_logging_ = true;
-  logging_thread_ = std::thread([this]() {
-    while (is_logging_ || !logs_to_print_.empty()) {
-      std::unique_lock<std::mutex> lock(mutex_);
-      logging_thread_wake_up_.wait(lock, [this]() {
-          return !logs_to_print_.empty() || !is_logging_;
-      });
-      if (!logs_to_print_.empty()) {
-        print_log_internal(logs_to_print_.front());
-        logs_to_print_.pop();
+  if (is_async_) {
+    is_logging_ = true;
+    logging_thread_ = std::thread([this]() {
+      while (is_logging_ || !logs_to_print_.empty()) {
+        std::unique_lock<std::mutex> lock(mutex_);
+        logging_thread_wake_up_.wait(lock, [this]() {
+            return !logs_to_print_.empty() || !is_logging_;
+        });
+        if (!logs_to_print_.empty()) {
+          print_log_internal(logs_to_print_.front());
+          logs_to_print_.pop();
+        }
       }
-    }
-  });
+    });
+  }
 }
 
