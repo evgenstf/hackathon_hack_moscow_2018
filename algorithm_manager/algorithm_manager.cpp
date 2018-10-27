@@ -5,6 +5,8 @@ AlgorithmManager::AlgorithmManager() {
   algorithms_.push_back(std::make_unique<OneClass>());
   INFO("load Hasher strategy")
   algorithms_.push_back(std::make_unique<Hasher>());
+  INFO("load Levenshtein strategy")
+  algorithms_.push_back(std::make_unique<Levenshtein>());
 }
 
 void AlgorithmManager::load_company_names(const std::vector<std::string>& company_names) {
