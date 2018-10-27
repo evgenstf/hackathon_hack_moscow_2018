@@ -36,8 +36,6 @@ public:
     original = to_lower(original);
     std::string result;
     for (size_t i = 0; i < original.size(); ++i) {
-      if (chars_.find(original[i]) == std::string::npos)
-        continue;
       bool match_any_word = false;
       for (const std::string& word : words_) {
         if (original.substr(i, word.size()) == word) {
@@ -49,6 +47,8 @@ public:
       if (match_any_word) {
         continue;
       }
+      if (chars_.find(original[i]) == std::string::npos)
+        continue;
       result += original[i];
     }
     return result;
