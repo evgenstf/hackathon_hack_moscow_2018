@@ -32,7 +32,8 @@ public:
     }
   }
 
-  std::string preprocess(const std::string& original) const {
+  std::string preprocess(std::string original) const {
+    original = to_lower(original);
     std::string result;
     for (size_t i = 0; i < original.size(); ++i) {
       if (chars_.find(original[i]) == std::string::npos)
