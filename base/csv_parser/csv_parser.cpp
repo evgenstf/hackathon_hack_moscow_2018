@@ -4,8 +4,6 @@
 #include <string>
 #include <iostream>
 
-
-namespace latte {
 namespace {
 
 static constexpr char kDelimiter = ',';
@@ -56,5 +54,3 @@ CsvParser::CsvParser(const std::string& file_name) {
     items_.emplace_back(std::move(item));
   }
 }
-
-}  // namespace latte
