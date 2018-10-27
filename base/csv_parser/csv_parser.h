@@ -4,8 +4,6 @@
 #include <vector>
 #include <unordered_map>
 
-namespace latte {
-
 class CsvParser {
 public:
   CsvParser(const std::string& file_name);
@@ -18,4 +16,3 @@ private:
   std::vector<std::unordered_map<std::string, std::string>> items_;
 };
 
-}  // namespace latte

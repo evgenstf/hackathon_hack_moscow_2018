@@ -2,8 +2,6 @@
 #include "csv_parser.h"
 #include <iostream>
 
-using namespace latte;
-
 int main(int arguments_count, char* arguments[]) {
   if (arguments_count < 2) {
     std::clog << "Usage: ./csv_parser [csv_file*]\n";

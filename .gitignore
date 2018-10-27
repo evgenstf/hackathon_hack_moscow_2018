@@ -34,10 +34,6 @@
 # Py
 *.npy
 
-# Input
-*.txt
-*.csv
-
 # vim
 *.DS_Store
 
@@ -46,6 +42,3 @@ latte
 
 # build
 build
-
-#cmake
-CmakeFiles
