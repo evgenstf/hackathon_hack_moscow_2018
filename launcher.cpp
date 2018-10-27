@@ -56,6 +56,5 @@ int main(int arguments_count, char* arguments[]) {
     std::cout << prediction_set.algorithm_name() << " score: " << prediction_score << std::endl;
   }
 
-
   return 0;
 }
