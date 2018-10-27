@@ -3,6 +3,7 @@
 #include <iostream>
 
 int main(int arguments_count, char* arguments[]) {
+  SET_LOG_LEVEL(Debug);
   std::cout << "Enter company count: ";
   size_t company_count = 0;
   std::cin >> company_count;

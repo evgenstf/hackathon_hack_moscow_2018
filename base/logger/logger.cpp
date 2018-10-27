@@ -1,8 +1,6 @@
 // Author: Evgenii Kazakov. Github: @evgenstf
 #include "logger.h"
 
-namespace latte {
-
 Logger::Logger():
     min_print_level_(LogLevel::Trace) {
   start_logging();
@@ -72,4 +70,3 @@ void Logger::start_logging() {
   });
 }
 
-}  // namespace latte

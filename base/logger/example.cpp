@@ -2,8 +2,6 @@
 #include "logger.h"
 #include <iostream>
 
-using namespace latte;
-
 int main(int arguments_count, char* arguments[]) {
   SET_LOG_LEVEL(Info);
   TRACE("count of rabbits " << 5);
