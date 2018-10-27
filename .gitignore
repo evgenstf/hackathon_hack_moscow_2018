@@ -40,3 +40,6 @@
 
 # vim
 *.DS_Store
+
+# latte
+latte
