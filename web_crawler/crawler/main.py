@@ -7,17 +7,20 @@ from const import URL_PATTERN
 
 
 def crawl(company_name):
+    print(URL_PATTERN.format(company_name))
     r = requests.get(URL_PATTERN.format(company_name))
 
     if r.status_code != 200:
         return None
 
-    return r.json
+    return r.text
 
 
 def get_companies_names(path):
     with open(path) as f:
          companies_names = f.read().split('\n')
+         company_name.pop()
+
          return companies_names
 
 
@@ -37,7 +40,7 @@ def main(args):
         result.append(crawled_data)
 
     with open(args.output_file, 'w') as f:
-        f.write(args.result_separato.join(result))
+        f.write('\n'.join(result))
 
 
 if __name__ == '__main__':
@@ -45,7 +48,6 @@ if __name__ == '__main__':
 
     parser.add_argument('--companies-file', help='path to file with newline separeted companies names', type=str)
     parser.add_argument('--output-file', help='path to result file', type=str)
-    parser.add_argument('--result-separator', default='\n', help='separator for result', type=str)
     parser.add_argument('--limit', default=None, help='limit for crawl', type=int)
 
     args = parser.parse_args()
