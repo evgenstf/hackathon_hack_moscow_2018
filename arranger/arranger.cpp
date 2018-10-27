@@ -1,7 +1,8 @@
 #include "arranger.h"
 
-#include <clusterizator>
+#include <algorithm>
 #include <cassert>
+#include <cmath>
 
 namespace {
 
