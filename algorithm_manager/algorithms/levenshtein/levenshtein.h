@@ -25,8 +25,8 @@ private:
       for (size_t i = 0; i < other.name_.size(); ++i) {
         d[0][i] = i;
       }
-      for (size_t i = 0; i < name_.size(); ++i) {
-        for (size_t j = 0; j < other.name_.size(); ++j) {
+      for (size_t i = 1; i < name_.size(); ++i) {
+        for (size_t j = 1; j < other.name_.size(); ++j) {
           unsigned int cost = !(name_[i] == other.name_[j]);
           d[i][j] = std::min({d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost});
         }
