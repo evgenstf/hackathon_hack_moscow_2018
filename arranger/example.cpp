@@ -5,7 +5,7 @@
 #include <iostream>
 
 int main() {
-    Arranger arranger("tmp");
+    Arranger arranger("example_model.csv");
 
     PredictionSet prediction_set("test");
     prediction_set.add_prediction("YANDEX", 0);
