@@ -53,7 +53,11 @@ We paid much attention to the architecture of the project. The resulting solutio
 extensible, distributable and simple in design. Below you can see a diagram with modules, each of
 which performs its own task.
 
-![Alt text](image/project_models_diagram.jpg?raw=true "Models")
+![Alt text](images/project_model_diagram.png?raw=true "Models")
 
 
-<p align="right">Author: Evgenii Kazakov, Nikita Michaylov, Dmitrii Zakharov. Moscow, 2018</p>
+<p align="right">Author: Evgenii Kazakov,
+                         Nikita Michaylov,
+                         Dmitrii Zakharov.
+                         
+                         Moscow, 2018</p>
