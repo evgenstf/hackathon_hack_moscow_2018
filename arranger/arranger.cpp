@@ -1,4 +1,5 @@
 #include "arranger.h"
+#include "base/logger/logger.h"
 
 #include <algorithm>
 #include <cassert>
@@ -17,6 +18,7 @@ namespace {
 } // namespace
 
 Arranger::Arranger(const std::string& path) {
+    DEBUG("parsing csv arranger model: " << path)
     CsvParser csv_parser(path);
 
     for (const auto& it : csv_parser.items()) {
@@ -42,9 +44,11 @@ Arranger::Arranger(const std::string& path) {
 
         model_[name] = std::move(features);
     }
+    DEBUG("finished")
 }
 
 double Arranger::GetScore(const PredictionSet& prediction_set) const {
+    INFO("calculating score for " << prediction_set.clusterizator_name())
     double score = 0;
 
     std::unordered_map<int, std::vector<std::string>> companies_by_cluster;

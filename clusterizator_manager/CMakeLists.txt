@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 2.8.4)
 project(clusterizator_manager)
 
 include(../base/common.cmake)
-add_subdirectory(../base/logger logger)
 add_subdirectory(../base/dbscan dbscan)
 add_subdirectory(../base/string_preprocessor string_preprocessor)
 

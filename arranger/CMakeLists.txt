@@ -8,5 +8,5 @@ add_library(arranger "arranger.cpp")
 target_link_libraries(arranger csv_parser)
 
 add_executable(arranger_example "example.cpp")
-target_link_libraries(arranger_example arranger)
+target_link_libraries(arranger_example arranger logger)
 set_target_properties(arranger_example PROPERTIES OUTPUT_NAME arranger)
