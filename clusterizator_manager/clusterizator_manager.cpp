@@ -5,12 +5,10 @@ ClusterizatorManager::ClusterizatorManager() {
   clusterizators_.push_back(std::make_unique<OneClass>());
   INFO("load Hasher strategy")
   clusterizators_.push_back(std::make_unique<Hasher>());
-  /*
   INFO("load Levenshtein strategy")
   clusterizators_.push_back(std::make_unique<Levenshtein>());
   INFO("load Levenshtein with company names preprocessing strategy")
   clusterizators_.push_back(std::make_unique<LevenshteinPreprocessed>());
-  */
   INFO("load \"Rand() % 2\" strategy")
   clusterizators_.push_back(std::make_unique<Rand2>());
 }
