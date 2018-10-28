@@ -56,4 +56,4 @@ which performs its own task.
 ![Alt text](images/project_model_diagram.png?raw=true "Models")
 
 
-<p align="right">Authors: Evgenii Kazakov, Nikita Michaylov, Dmitrii Zakharov.  Moscow, 2018</p>
+<p align="right">Authors: Evgenii Kazakov, Nikita Mikhaylov, Dmitrii Zakharov.  Moscow, 2018</p>
