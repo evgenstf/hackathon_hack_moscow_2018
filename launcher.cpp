@@ -48,7 +48,7 @@ void save_statistics(
   std::ofstream file(
       kOutputDirectory + '/' + clusterizator_name + "_statistics.txt");
   auto statistics = statistics_manager.statistics(clusterizator_name);
-  file << "score: " << statistics.score << '\n';
+  file << "web_score: " << statistics.web_score << '\n';
   file << "median_cluster_size: " << statistics.median_cluster_size << '\n';
   file << "average_cluster_size: " << statistics.average_cluster_size << '\n';
   file << "coefficient_gini: " << statistics.coefficient_gini << '\n';
@@ -73,7 +73,7 @@ void print_statistics(
   std::cout << "-----------------------------------\n";
   auto statistics = statistics_manager.statistics(clusterizator_name);
   std::cout << "clusterizator: " << statistics.name << std::endl;
-  std::cout << "   score: " << statistics.score << std::endl;
+  std::cout << "   web_score: " << statistics.web_score << std::endl;
   std::cout << "   median_cluster_size: " << statistics.median_cluster_size << std::endl;
   std::cout << "   average_cluster_size: " << statistics.average_cluster_size << std::endl;
   std::cout << "   coefficient_gini: " << statistics.coefficient_gini << std::endl;
@@ -105,7 +105,7 @@ int main(int arguments_count, char* arguments[]) {
   for (const auto& prediction_set : prediction_sets) {
     statistics_manager.process_prediction_set(prediction_set);
     auto prediction_score = arranger.GetScore(prediction_set);
-    statistics_manager.set_score(prediction_set.clusterizator_name(), prediction_score);
+    statistics_manager.set_web_score(prediction_set.clusterizator_name(), prediction_score);
     print_statistics(statistics_manager, prediction_set.clusterizator_name());
     save_prediction(prediction_set);
     save_statistics(statistics_manager, prediction_set.clusterizator_name());

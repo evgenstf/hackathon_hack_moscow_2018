@@ -7,9 +7,9 @@ void StatisticsManager::set_execution_time(const std::string& clusterizator_name
   statistics_.at(clusterizator_name).execution_time = execution_time;
 }
 
-void StatisticsManager::set_score(const std::string& clusterizator_name, double score) {
+void StatisticsManager::set_web_score(const std::string& clusterizator_name, double score) {
   add_statistics_if_not_exists(clusterizator_name);
-  statistics_.at(clusterizator_name).score = score;
+  statistics_.at(clusterizator_name).web_score = score;
 }
 
 void StatisticsManager::process_prediction_set(const PredictionSet& prediction_set) {
