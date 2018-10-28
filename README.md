@@ -1,6 +1,6 @@
 Mapping algorithms analyzer
 =====================================
-As part of the *Hack.Moscow* hackathon, we have prepared a solution to one of the many tracks, the theme of which
+As part of the **Hack.Moscow** hackathon, we have prepared a solution to one of the many tracks, the theme of which
 is to write an analyzer for clustering algorithms. 
 
 Problem Statement
@@ -14,7 +14,9 @@ which data pieces correspond with each other.
 In particular, when dealing with companies extracted from text, it is advantageous to map them to
 a database of companies by name as a first step of structuring such data.
 Let's define mapping algorithms as follows:
-$$({input_company_names}, {internal_company_names}) -> {input_name: internal_name}$$
+
+**({input_company_names}, {internal_company_names}) -> {input_name: internal_name**
+
 Imagine you organized a competition between Data Scientists, and they implemented a long list
 of such algorithms.
 How would you choose the best one (for some particular dataset or for general usage) from
